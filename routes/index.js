@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 });
 
 
-
 router.get('/forecast', function(req, res, next) {
 
   let latitude = req.query.lat;
@@ -23,7 +22,6 @@ router.get('/forecast', function(req, res, next) {
   });
 
 });
-
 
 
 module.exports = router;
