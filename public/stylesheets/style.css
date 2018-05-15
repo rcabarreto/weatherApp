@@ -8192,4 +8192,46 @@ body {
 div#weatherApp {
   width: 100%; }
 
+.cover-container.clear-day {
+  background: url("/images/background/clear-day.jpg"); }
+
+.cover-container.clear-night {
+  background: url("/images/background/clear-night.jpg"); }
+
+.cover-container.rain {
+  background: url("/images/background/rain.jpg"); }
+
+.cover-container.snow {
+  background: url("/images/background/snow.jpg"); }
+
+.cover-container.sleet {
+  background: url("/images/background/sleet.jpg"); }
+
+.cover-container.wind {
+  background: url("/images/background/wind.jpg"); }
+
+.cover-container.fog {
+  background: url("/images/background/fog.jpg"); }
+
+.cover-container.cloudy {
+  background: url("/images/background/cloudy.jpg"); }
+
+.cover-container.partly-cloudy-day {
+  background: url("/images/background/partly-cloudy-day.jpg"); }
+
+.cover-container.partly-cloudy-night {
+  background: url("/images/background/partly-cloudy-night.jpg"); }
+
+.cover-container.hail {
+  background: url("/images/background/hail.jpg"); }
+
+.cover-container.thunderstorm {
+  background: url("/images/background/thunderstorm.jpg"); }
+
+.cover-container.tornado {
+  background: url("/images/background/tornado.jpg"); }
+
+main#currentWeather div#currentWeather {
+  font-size: 55px; }
+
 /*# sourceMappingURL=style.css.map */

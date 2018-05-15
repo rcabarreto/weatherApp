@@ -69,7 +69,7 @@ function showError(errorMessage) {
 }
 
 
-$( document ).ready(function() {
-  console.log( "ready!" );
-  getLocation();
-});
+// $( document ).ready(function() {
+//   console.log( "ready!" );
+//   getLocation();
+// });
