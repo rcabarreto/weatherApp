@@ -30,7 +30,7 @@ function loadWeatherForecast(position) {
   console.log("Latitude: " + position.coords.latitude);
   console.log("Longitude: " + position.coords.longitude);
 
-  $.getJSON( "http://localhost:3000/forecast", { lat: position.coords.latitude, lgn: position.coords.longitude } )
+  $.getJSON( "/forecast", { lat: position.coords.latitude, lgn: position.coords.longitude } )
     .done(function(json) {
       parseWeatherJson(json);
     })

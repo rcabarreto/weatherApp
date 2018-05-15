@@ -8189,4 +8189,7 @@ body {
 .hide {
   display: none; }
 
+div#weatherApp {
+  width: 100%; }
+
 /*# sourceMappingURL=style.css.map */
