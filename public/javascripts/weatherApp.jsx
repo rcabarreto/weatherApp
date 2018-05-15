@@ -1,6 +1,10 @@
 
 
 const WeatherApp = React.createClass({
+  componentDidMount: function() {
+    this.getLocation();
+  },
+
   getDefaultProps: function () {
     return {
       title: 'Tiny Weather App',
