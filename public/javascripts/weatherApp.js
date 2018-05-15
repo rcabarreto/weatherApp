@@ -1,11 +1,12 @@
 
-function getLocation(callback) {
+function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(loadWeatherForecast, error);
   } else {
     console.log("Geolocation is not supported by this browser.");
   }
 }
+
 
 function error(error) {
   switch(error.code) {
@@ -24,6 +25,7 @@ function error(error) {
   }
 }
 
+
 function loadWeatherForecast(position) {
   console.log("Latitude: " + position.coords.latitude);
   console.log("Longitude: " + position.coords.longitude);
@@ -35,9 +37,11 @@ function loadWeatherForecast(position) {
     .fail(function( jqxhr, textStatus, error ) {
       var err = textStatus + ", " + error;
       console.log( "Request Failed: " + err );
+      showError(error);
     });
 
 }
+
 
 function parseWeatherJson(weatherJson) {
 
