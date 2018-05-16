@@ -1,3 +1,5 @@
+const React = require('react');
+const ReactDOM = require('react-dom');
 
 
 const WeatherApp = React.createClass({
@@ -65,21 +67,23 @@ const WeatherApp = React.createClass({
     let summary = this.state.summary;
 
     return (
-      <div className={"cover-container d-flex w-100 h-100 p-3 mx-auto flex-column "+ icon}>
+      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ icon}>
+        <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-        <AppHeader title={title}/>
+          <AppHeader title={title}/>
 
-        <AppLoader/>
+          <AppLoader/>
 
-        <main id="errorContainer" role="loader" className="inner cover hide">
-          <h1 className="cover-heading">Oops... something went wrong!</h1>
-          <p id="errorMessage" className="lead"></p>
-        </main>
+          <main id="errorContainer" role="loader" className="inner cover hide">
+            <h1 className="cover-heading">Oops... something went wrong!</h1>
+            <p id="errorMessage" className="lead"></p>
+          </main>
 
-        <WeatherInfo city={city} temperature={temperature} icon={icon} summary={summary}/>
+          <WeatherInfo city={city} temperature={temperature} icon={icon} summary={summary}/>
 
-        <AppFooter onNewTitle={this.getLocation}/>
+          <AppFooter onNewTitle={this.getLocation}/>
 
+        </div>
       </div>
     );
   }
@@ -94,6 +98,7 @@ const AppLoader = React.createClass({
     )
   }
 });
+
 
 const AppHeader = React.createClass({
   render: function () {

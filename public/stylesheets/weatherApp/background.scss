@@ -1,14 +1,23 @@
 
-.cover-container.clear-day{ background: url('/images/background/clear-day.jpg'); }
-.cover-container.clear-night{ background: url('/images/background/clear-night.jpg'); }
-.cover-container.rain{ background: url('/images/background/rain.jpg'); }
-.cover-container.snow{ background: url('/images/background/snow.jpg'); }
-.cover-container.sleet{ background: url('/images/background/sleet.jpg'); }
-.cover-container.wind{ background: url('/images/background/wind.jpg'); }
-.cover-container.fog{ background: url('/images/background/fog.jpg'); }
-.cover-container.cloudy{ background: url('/images/background/cloudy.jpg'); }
-.cover-container.partly-cloudy-day{ background: url('/images/background/partly-cloudy-day.jpg'); }
-.cover-container.partly-cloudy-night{ background: url('/images/background/partly-cloudy-night.jpg'); }
-.cover-container.hail{ background: url('/images/background/hail.jpg'); }
-.cover-container.thunderstorm{ background: url('/images/background/thunderstorm.jpg'); }
-.cover-container.tornado{ background: url('/images/background/tornado.jpg'); }
+.weatherBackground {
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.weatherBackground.clear-day{ background-image: url('/images/background/clear-day.jpg'); }
+.weatherBackground.clear-night{ background-image: url('/images/background/clear-night.jpg'); }
+.weatherBackground.rain{ background-image: url('/images/background/rain.jpg'); }
+.weatherBackground.snow{ background-image: url('/images/background/snow.jpg'); }
+.weatherBackground.sleet{ background-image: url('/images/background/sleet.jpg'); }
+.weatherBackground.wind{ background-image: url('/images/background/wind.jpg'); }
+.weatherBackground.fog{ background-image: url('/images/background/fog.jpg'); }
+.weatherBackground.cloudy{ background-image: url('/images/background/cloudy.jpg'); }
+.weatherBackground.partly-cloudy-day{ background-image: url('/images/background/cloudy.jpg'); }
+.weatherBackground.partly-cloudy-night{ background-image: url('/images/background/partly-cloudy-night.jpg'); }
+.weatherBackground.hail{ background-image: url('/images/background/hail.jpg'); }
+.weatherBackground.thunderstorm{ background-image: url('/images/background/thunderstorm.jpg'); }
+.weatherBackground.tornado{ background-image: url('/images/background/tornado.jpg'); }
