@@ -49,234 +49,7 @@
 	var React = __webpack_require__(1);
 	var ReactDOM = __webpack_require__(158);
 
-	var WeatherApp = React.createClass({
-	  displayName: 'WeatherApp',
-
-	  componentDidMount: function componentDidMount() {
-	    this.getLocation();
-	  },
-
-	  getDefaultProps: function getDefaultProps() {
-	    return {
-	      title: 'Tiny Weather App',
-	      city: '',
-	      temperature: 0,
-	      icon: '',
-	      summary: ''
-	    };
-	  },
-	  getInitialState: function getInitialState() {
-	    return {
-	      title: this.props.title,
-	      city: this.props.city,
-	      temperature: this.props.temperature,
-	      icon: this.props.icon,
-	      summary: this.props.summary
-	    };
-	  },
-	  getLocation: function getLocation() {
-	    if (navigator.geolocation) {
-	      navigator.geolocation.getCurrentPosition(this.loadWeatherInfo);
-	    } else {
-	      console.log("Geolocation is not supported by this browser.");
-	    }
-	  },
-	  loadWeatherInfo: function loadWeatherInfo(position) {
-	    console.log("Latitude: " + position.coords.latitude);
-	    console.log("Longitude: " + position.coords.longitude);
-
-	    var self = this;
-
-	    $.getJSON("/forecast", { lat: position.coords.latitude, lgn: position.coords.longitude }).done(function (json) {
-	      self.handleLoadWeatherInfo(json);
-	    }).fail(function (jqxhr, textStatus, error) {
-	      var err = textStatus + ", " + error;
-	      console.log("Request Failed: " + err);
-	      showError(error);
-	    });
-	  },
-	  handleLoadWeatherInfo: function handleLoadWeatherInfo(weatherInfo) {
-	    this.setState({
-	      city: weatherInfo.addressname,
-	      temperature: parseInt(weatherInfo.temperature),
-	      icon: weatherInfo.icon,
-	      summary: weatherInfo.summary
-	    });
-	    showWeather();
-	  },
-	  render: function render() {
-	    var title = this.state.title;
-
-	    var city = this.state.city;
-	    var temperature = this.state.temperature;
-	    var icon = this.state.icon;
-	    var summary = this.state.summary;
-
-	    return React.createElement(
-	      'div',
-	      { className: "weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column " + icon },
-	      React.createElement(
-	        'div',
-	        { className: 'cover-container d-flex w-100 h-100 p-3 mx-auto flex-column' },
-	        React.createElement(AppHeader, { title: title }),
-	        React.createElement(AppLoader, null),
-	        React.createElement(
-	          'main',
-	          { id: 'errorContainer', role: 'loader', className: 'inner cover hide' },
-	          React.createElement(
-	            'h1',
-	            { className: 'cover-heading' },
-	            'Oops... something went wrong!'
-	          ),
-	          React.createElement('p', { id: 'errorMessage', className: 'lead' })
-	        ),
-	        React.createElement(WeatherInfo, { city: city, temperature: temperature, icon: icon, summary: summary }),
-	        React.createElement(AppFooter, { onNewTitle: this.getLocation })
-	      )
-	    );
-	  }
-	});
-
-	var AppLoader = React.createClass({
-	  displayName: 'AppLoader',
-
-	  render: function render() {
-	    return React.createElement(
-	      'main',
-	      { id: 'loader', role: 'loader', className: 'inner cover' },
-	      React.createElement(
-	        'p',
-	        { id: 'loader', className: 'lead' },
-	        React.createElement('img', { src: '/images/ajax-loader-white.gif' })
-	      )
-	    );
-	  }
-	});
-
-	var AppHeader = React.createClass({
-	  displayName: 'AppHeader',
-
-	  render: function render() {
-	    var title = this.props.title;
-	    return React.createElement(
-	      'header',
-	      { className: 'masthead mb-auto' },
-	      React.createElement(
-	        'div',
-	        { className: 'inner' },
-	        React.createElement(
-	          'h3',
-	          { className: 'masthead-brand' },
-	          title
-	        ),
-	        React.createElement(
-	          'nav',
-	          { className: 'nav nav-masthead justify-content-center' },
-	          React.createElement(
-	            'a',
-	            { className: 'nav-link active', href: '#' },
-	            'Now'
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'nav-link', href: '#' },
-	            'Today'
-	          ),
-	          React.createElement(
-	            'a',
-	            { className: 'nav-link', href: '#' },
-	            'This week'
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
-
-	var WeatherInfo = React.createClass({
-	  displayName: 'WeatherInfo',
-
-	  render: function render() {
-
-	    var city = this.props.city;
-	    var temperature = this.props.temperature;
-	    var icon = this.props.icon;
-	    var summary = this.props.summary;
-
-	    return React.createElement(
-	      'main',
-	      { id: 'currentWeather', role: 'main', className: 'inner cover hide' },
-	      React.createElement(
-	        'h1',
-	        { id: 'weatherTitle', className: 'cover-heading' },
-	        city
-	      ),
-	      React.createElement(
-	        'h4',
-	        null,
-	        summary
-	      ),
-	      React.createElement(
-	        'div',
-	        { id: 'currentWeather', className: 'metric-stat' },
-	        React.createElement('span', { id: 'weather-icon', className: "wi wi-forecast-io-" + icon, title: summary }),
-	        React.createElement(
-	          'span',
-	          { id: 'weather-temp', className: 'metric-stat-number' },
-	          temperature,
-	          '\xB0'
-	        ),
-	        React.createElement(
-	          'span',
-	          { id: 'weather-unit', className: 'unit' },
-	          'c'
-	        )
-	      )
-	    );
-	  }
-	});
-
-	var AppFooter = React.createClass({
-	  displayName: 'AppFooter',
-
-	  onClickButton: function onClickButton(e) {
-	    e.preventDefault();
-	    this.props.onNewTitle({
-	      city: 'Canoas',
-	      temperature: '222',
-	      icon: 'chuchu',
-	      summary: 'Seilá'
-	    });
-	  },
-	  render: function render() {
-	    return React.createElement(
-	      'footer',
-	      { className: 'mastfoot mt-auto' },
-	      React.createElement(
-	        'div',
-	        { className: 'inner' },
-	        React.createElement(
-	          'p',
-	          null,
-	          React.createElement(
-	            'a',
-	            { href: 'https://darksky.net/poweredby/' },
-	            'Powered by Dark Sky'
-	          )
-	        ),
-	        React.createElement(
-	          'p',
-	          { className: 'lead', onClick: this.onClickButton },
-	          React.createElement(
-	            'a',
-	            { href: '#', className: 'btn btn-lg btn-secondary' },
-	            'Load weather'
-	          )
-	        )
-	      )
-	    );
-	  }
-	});
+	var WeatherApp = __webpack_require__(159);
 
 	ReactDOM.render(React.createElement(WeatherApp, null), document.getElementById('weatherApp'));
 
@@ -19973,6 +19746,290 @@
 
 	module.exports = __webpack_require__(3);
 
+
+/***/ },
+/* 159 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var WeatherHeader = __webpack_require__(160);
+	var WeatherLoader = __webpack_require__(161);
+	var WeatherInfo = __webpack_require__(162);
+	var WeatherFooter = __webpack_require__(163);
+
+	var WeatherApp = React.createClass({
+	  displayName: 'WeatherApp',
+
+	  componentDidMount: function componentDidMount() {
+	    this.getLocation();
+	  },
+
+	  getDefaultProps: function getDefaultProps() {
+	    return {
+	      title: 'Tiny Weather App',
+	      city: '',
+	      temperature: 0,
+	      icon: '',
+	      summary: ''
+	    };
+	  },
+	  getInitialState: function getInitialState() {
+	    return {
+	      title: this.props.title,
+	      city: this.props.city,
+	      temperature: this.props.temperature,
+	      icon: this.props.icon,
+	      summary: this.props.summary
+	    };
+	  },
+	  getLocation: function getLocation() {
+	    if (navigator.geolocation) {
+	      navigator.geolocation.getCurrentPosition(this.loadWeatherInfo);
+	    } else {
+	      console.log("Geolocation is not supported by this browser.");
+	    }
+	  },
+	  loadWeatherInfo: function loadWeatherInfo(position) {
+	    console.log("Latitude: " + position.coords.latitude);
+	    console.log("Longitude: " + position.coords.longitude);
+
+	    var self = this;
+
+	    $.getJSON("/forecast", { lat: position.coords.latitude, lgn: position.coords.longitude }).done(function (json) {
+	      self.handleLoadWeatherInfo(json);
+	    }).fail(function (jqxhr, textStatus, error) {
+	      var err = textStatus + ", " + error;
+	      console.log("Request Failed: " + err);
+	      showError(error);
+	    });
+	  },
+	  handleLoadWeatherInfo: function handleLoadWeatherInfo(weatherInfo) {
+	    this.setState({
+	      city: weatherInfo.addressname,
+	      temperature: parseInt(weatherInfo.temperature),
+	      icon: weatherInfo.icon,
+	      summary: weatherInfo.summary
+	    });
+	    showWeather();
+	  },
+	  render: function render() {
+	    var title = this.state.title;
+
+	    var city = this.state.city;
+	    var temperature = this.state.temperature;
+	    var icon = this.state.icon;
+	    var summary = this.state.summary;
+
+	    return React.createElement(
+	      'div',
+	      { className: "weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column " + icon },
+	      React.createElement(
+	        'div',
+	        { className: 'cover-container d-flex w-100 h-100 p-3 mx-auto flex-column' },
+	        React.createElement(WeatherHeader, { title: title }),
+	        React.createElement(WeatherLoader, null),
+	        React.createElement(
+	          'main',
+	          { id: 'errorContainer', role: 'loader', className: 'inner cover hide' },
+	          React.createElement(
+	            'h1',
+	            { className: 'cover-heading' },
+	            'Oops... something went wrong!'
+	          ),
+	          React.createElement('p', { id: 'errorMessage', className: 'lead' })
+	        ),
+	        React.createElement(WeatherInfo, { city: city, temperature: temperature, icon: icon, summary: summary }),
+	        React.createElement(WeatherFooter, { onNewTitle: this.getLocation })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WeatherApp;
+
+/***/ },
+/* 160 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var WeatherHeader = React.createClass({
+	  displayName: "WeatherHeader",
+
+	  render: function render() {
+	    var title = this.props.title;
+	    return React.createElement(
+	      "header",
+	      { className: "masthead mb-auto" },
+	      React.createElement(
+	        "div",
+	        { className: "inner" },
+	        React.createElement(
+	          "h3",
+	          { className: "masthead-brand" },
+	          title
+	        ),
+	        React.createElement(
+	          "nav",
+	          { className: "nav nav-masthead justify-content-center" },
+	          React.createElement(
+	            "a",
+	            { className: "nav-link active", href: "#" },
+	            "Now"
+	          ),
+	          React.createElement(
+	            "a",
+	            { className: "nav-link", href: "#" },
+	            "Today"
+	          ),
+	          React.createElement(
+	            "a",
+	            { className: "nav-link", href: "#" },
+	            "This week"
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WeatherHeader;
+
+/***/ },
+/* 161 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var WeatherLoader = React.createClass({
+	  displayName: "WeatherLoader",
+
+	  render: function render() {
+	    return React.createElement(
+	      "main",
+	      { id: "loader", role: "loader", className: "inner cover" },
+	      React.createElement(
+	        "p",
+	        { id: "loader", className: "lead" },
+	        React.createElement("img", { src: "/images/ajax-loader-white.gif" })
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WeatherLoader;
+
+/***/ },
+/* 162 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	var React = __webpack_require__(1);
+
+	var WeatherInfo = React.createClass({
+	  displayName: "WeatherInfo",
+
+	  render: function render() {
+
+	    var city = this.props.city;
+	    var temperature = this.props.temperature;
+	    var icon = this.props.icon;
+	    var summary = this.props.summary;
+
+	    return React.createElement(
+	      "main",
+	      { id: "currentWeather", role: "main", className: "inner cover hide" },
+	      React.createElement(
+	        "h1",
+	        { id: "weatherTitle", className: "cover-heading" },
+	        city
+	      ),
+	      React.createElement(
+	        "h4",
+	        null,
+	        summary
+	      ),
+	      React.createElement(
+	        "div",
+	        { id: "currentWeather", className: "metric-stat" },
+	        React.createElement("span", { id: "weather-icon", className: "wi wi-forecast-io-" + icon, title: summary }),
+	        React.createElement(
+	          "span",
+	          { id: "weather-temp", className: "metric-stat-number" },
+	          temperature,
+	          "\xB0"
+	        ),
+	        React.createElement(
+	          "span",
+	          { id: "weather-unit", className: "unit" },
+	          "c"
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WeatherInfo;
+
+/***/ },
+/* 163 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var React = __webpack_require__(1);
+
+	var WeatherFooter = React.createClass({
+	  displayName: 'WeatherFooter',
+
+	  onClickButton: function onClickButton(e) {
+	    e.preventDefault();
+	    this.props.onNewTitle({
+	      city: 'Canoas',
+	      temperature: '222',
+	      icon: 'chuchu',
+	      summary: 'Seilá'
+	    });
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'footer',
+	      { className: 'mastfoot mt-auto' },
+	      React.createElement(
+	        'div',
+	        { className: 'inner' },
+	        React.createElement(
+	          'p',
+	          null,
+	          React.createElement(
+	            'a',
+	            { href: 'https://darksky.net/poweredby/' },
+	            'Powered by Dark Sky'
+	          )
+	        ),
+	        React.createElement(
+	          'p',
+	          { className: 'lead', onClick: this.onClickButton },
+	          React.createElement(
+	            'a',
+	            { href: '#', className: 'btn btn-lg btn-secondary' },
+	            'Load weather'
+	          )
+	        )
+	      )
+	    );
+	  }
+	});
+
+	module.exports = WeatherFooter;
 
 /***/ }
 /******/ ]);
