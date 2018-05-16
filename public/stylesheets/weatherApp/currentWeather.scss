@@ -1,9 +1,19 @@
-main#currentWeather{
+main#weatherInformation{
 
   div#currentWeather {
     font-size: 60px;
+
+    span#weather-icon {
+      margin-right: 10px;
+    }
+
   }
 
+  div#currentWeatherFeelsLike {
+    font-size: 16px;
+  }
 
 }
+
+
 

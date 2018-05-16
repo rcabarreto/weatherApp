@@ -56,8 +56,8 @@ function parseWeatherJson(weatherJson) {
 
 
 function showWeather() {
-  $('#loader').addClass('hide');
-  $('#currentWeather').removeClass('hide');
+  // $('#loader').addClass('hide');
+  // $('#weatherInformation').removeClass('hide');
 }
 
 

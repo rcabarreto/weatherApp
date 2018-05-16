@@ -4,19 +4,28 @@ const WeatherInfo = React.createClass({
   render: function () {
 
     let city = this.props.city;
-    let temperature = this.props.temperature;
-    let icon = this.props.icon;
-    let summary = this.props.summary;
+    let currently = this.props.currently;
 
     return (
-      <main id="currentWeather" role="main" className="inner cover hide">
+      <main id="weatherInformation" role="main" className="inner cover">
+
         <h1 id="weatherTitle" className="cover-heading">{city}</h1>
-        <h4>{summary}</h4>
+        <h3>{currently.summary}</h3>
+
         <div id="currentWeather" className="metric-stat">
-          <span id="weather-icon" className={"wi wi-forecast-io-"+icon} title={summary}></span>
-          <span id="weather-temp" className="metric-stat-number">{temperature}°</span>
+          <span id="weather-icon" className={"wi wi-forecast-io-"+currently.icon} title={currently.summary}></span>
+          <span id="weather-temp" className="metric-stat-number">{parseInt(currently.temperature)}°</span>
           <span id="weather-unit" className="unit">c</span>
         </div>
+
+        <div id="currentWeatherFeelsLike" className="metric-stat">
+          <span id="weather-temp" className="metric-stat-number">Feels like {parseInt(currently.temperature)}°</span>
+          <span id="weather-unit" className="unit">c</span>
+        </div>
+
+        <div id="dailyWeather"></div>
+
+
       </main>
     )
   }

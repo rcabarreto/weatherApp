@@ -8225,7 +8225,7 @@ div#weatherApp {
   background-image: url("/images/background/cloudy.jpg"); }
 
 .weatherBackground.partly-cloudy-day {
-  background-image: url("/images/background/cloudy.jpg"); }
+  background-image: url("/images/background/partly-cloudy-day.jpg"); }
 
 .weatherBackground.partly-cloudy-night {
   background-image: url("/images/background/partly-cloudy-night.jpg"); }
@@ -8239,7 +8239,12 @@ div#weatherApp {
 .weatherBackground.tornado {
   background-image: url("/images/background/tornado.jpg"); }
 
-main#currentWeather div#currentWeather {
+main#weatherInformation div#currentWeather {
   font-size: 60px; }
+  main#weatherInformation div#currentWeather span#weather-icon {
+    margin-right: 10px; }
+
+main#weatherInformation div#currentWeatherFeelsLike {
+  font-size: 16px; }
 
 /*# sourceMappingURL=style.css.map */

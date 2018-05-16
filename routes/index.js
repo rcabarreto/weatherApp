@@ -22,15 +22,9 @@ router.get('/forecast', function(req, res, next) {
     let addressName;
 
     addressComponents.forEach(addressComponent => {
-
-      let addressTypes = addressComponent.types;
-
-      if (addressTypes.find((value) => { return value === 'locality' }))
+      if (addressComponent.types.find((value) => { return value === 'locality' }))
         addressName = addressComponent.long_name;
-
     });
-
-    console.log("addressName:",addressName);
 
     return darksky.fetchForecast(latitude, longitude, addressName);
 
@@ -40,7 +34,6 @@ router.get('/forecast', function(req, res, next) {
     console.log(err);
     res.status(500).send(err);
   });
-
 
 });
 

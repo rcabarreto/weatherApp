@@ -1,9 +1,11 @@
 const React = require('react');
+const _ = require('underscore');
 
 const WeatherHeader = require('./WeatherHeader');
 const WeatherLoader = require('./WeatherLoader');
 const WeatherInfo   = require('./WeatherInfo');
 const WeatherFooter = require('./WeatherFooter');
+const WeatherError  = require('./WeatherError');
 
 const WeatherApp = React.createClass({
   componentDidMount: function() {
@@ -14,18 +16,14 @@ const WeatherApp = React.createClass({
     return {
       title: 'Tiny Weather App',
       city: '',
-      temperature: 0,
-      icon: '',
-      summary: ''
+      currently: {}
     };
   },
   getInitialState: function () {
     return {
       title: this.props.title,
       city: this.props.city,
-      temperature: this.props.temperature,
-      icon: this.props.icon,
-      summary: this.props.summary
+      currently: this.props.currently
     };
   },
   getLocation: function () {
@@ -54,35 +52,27 @@ const WeatherApp = React.createClass({
   },
   handleLoadWeatherInfo: function (weatherInfo) {
     this.setState({
-      city: weatherInfo.addressname,
-      temperature: parseInt(weatherInfo.temperature),
-      icon: weatherInfo.icon,
-      summary: weatherInfo.summary
+      city: weatherInfo.cityName,
+      currently: weatherInfo.currently
     });
     showWeather();
   },
   render: function () {
     let title = this.state.title;
-
     let city = this.state.city;
-    let temperature = this.state.temperature;
-    let icon = this.state.icon;
-    let summary = this.state.summary;
+    let currently = this.state.currently;
 
     return (
-      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ icon}>
+      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ currently.icon}>
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
           <WeatherHeader title={title}/>
 
-          <WeatherLoader/>
+          <WeatherError/>
 
-          <main id="errorContainer" role="loader" className="inner cover hide">
-            <h1 className="cover-heading">Oops... something went wrong!</h1>
-            <p id="errorMessage" className="lead"></p>
-          </main>
+          {_.isEmpty(currently) && <WeatherLoader/>}
 
-          <WeatherInfo city={city} temperature={temperature} icon={icon} summary={summary}/>
+          {!_.isEmpty(currently) && <WeatherInfo city={city} currently={currently}/>}
 
           <WeatherFooter onNewTitle={this.getLocation}/>
 
