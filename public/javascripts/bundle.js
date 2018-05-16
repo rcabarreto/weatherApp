@@ -19765,6 +19765,7 @@
 	var WeatherApp = React.createClass({
 	  displayName: 'WeatherApp',
 
+
 	  componentDidMount: function componentDidMount() {
 	    this.getLocation();
 	  },
@@ -19773,16 +19774,20 @@
 	    return {
 	      title: 'Tiny Weather App',
 	      city: '',
+	      error: {},
 	      currently: {}
 	    };
 	  },
+
 	  getInitialState: function getInitialState() {
 	    return {
 	      title: this.props.title,
 	      city: this.props.city,
+	      error: this.props.error,
 	      currently: this.props.currently
 	    };
 	  },
+
 	  getLocation: function getLocation() {
 	    if (navigator.geolocation) {
 	      navigator.geolocation.getCurrentPosition(this.loadWeatherInfo);
@@ -19790,6 +19795,7 @@
 	      console.log("Geolocation is not supported by this browser.");
 	    }
 	  },
+
 	  loadWeatherInfo: function loadWeatherInfo(position) {
 	    console.log("Latitude: " + position.coords.latitude);
 	    console.log("Longitude: " + position.coords.longitude);
@@ -19801,9 +19807,10 @@
 	    }).fail(function (jqxhr, textStatus, error) {
 	      var err = textStatus + ", " + error;
 	      console.log("Request Failed: " + err);
-	      showError(error);
+	      self.handleError(error);
 	    });
 	  },
+
 	  handleLoadWeatherInfo: function handleLoadWeatherInfo(weatherInfo) {
 	    this.setState({
 	      city: weatherInfo.cityName,
@@ -19811,9 +19818,18 @@
 	    });
 	    showWeather();
 	  },
+
+	  handleError: function handleError(errorObj) {
+	    this.setState({
+	      error: errorObj
+	    });
+	  },
+
 	  render: function render() {
+
 	    var title = this.state.title;
 	    var city = this.state.city;
+	    var error = this.state.error;
 	    var currently = this.state.currently;
 
 	    return React.createElement(
@@ -19823,9 +19839,9 @@
 	        'div',
 	        { className: 'cover-container d-flex w-100 h-100 p-3 mx-auto flex-column' },
 	        React.createElement(WeatherHeader, { title: title }),
-	        React.createElement(WeatherError, null),
-	        _.isEmpty(currently) && React.createElement(WeatherLoader, null),
+	        !_.isEmpty(error) && React.createElement(WeatherError, { error: error }),
 	        !_.isEmpty(currently) && React.createElement(WeatherInfo, { city: city, currently: currently }),
+	        _.isEmpty(currently) && _.isEmpty(error) && React.createElement(WeatherLoader, null),
 	        React.createElement(WeatherFooter, { onNewTitle: this.getLocation })
 	      )
 	    );
@@ -21735,15 +21751,22 @@
 	  displayName: "WeatherError",
 
 	  render: function render() {
+
+	    var error = this.props.error;
+
 	    return React.createElement(
 	      "main",
-	      { id: "errorContainer", role: "loader", className: "inner cover hide" },
+	      { id: "errorContainer", role: "loader", className: "inner cover" },
 	      React.createElement(
 	        "h1",
 	        { className: "cover-heading" },
 	        "Oops... something went wrong!"
 	      ),
-	      React.createElement("p", { id: "errorMessage", className: "lead" })
+	      React.createElement(
+	        "p",
+	        { id: "errorMessage", className: "lead" },
+	        error.message
+	      )
 	    );
 	  }
 	});

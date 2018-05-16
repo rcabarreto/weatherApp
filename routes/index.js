@@ -3,7 +3,7 @@ const router = express.Router();
 
 const maps = require('../lib/googleMapsApi');
 const darksky = require('../lib/darksky');
-
+const CustomError = require('../lib/customError');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -26,13 +26,15 @@ router.get('/forecast', function(req, res, next) {
         addressName = addressComponent.long_name;
     });
 
+    // throw new Error('this is an error');
+
     return darksky.fetchForecast(latitude, longitude, addressName);
 
   }).then(result => {
     res.status(200).json(result);
   }).catch(err => {
     console.log(err);
-    res.status(500).send(err);
+    res.status(500).json({ code: 100, message: err.message });
   });
 
 });

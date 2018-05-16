@@ -62,10 +62,9 @@ function showWeather() {
 
 
 function showError(errorMessage) {
-  $('#errorMessage').html(errorMessage);
-
-  $('#loader').addClass('hide');
-  $('#errorContainer').removeClass('hide');
+  // $('#errorMessage').html(errorMessage);
+  // $('#loader').addClass('hide');
+  // $('#errorContainer').removeClass('hide');
 }
 
 

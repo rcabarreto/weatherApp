@@ -25,7 +25,6 @@ const WeatherInfo = React.createClass({
 
         <div id="dailyWeather"></div>
 
-
       </main>
     )
   }
