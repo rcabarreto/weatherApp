@@ -19790,15 +19790,13 @@
 
 	  getLocation: function getLocation() {
 	    if (navigator.geolocation) {
-	      navigator.geolocation.getCurrentPosition(this.loadWeatherInfo);
+	      navigator.geolocation.getCurrentPosition(this.loadWeatherInfo, this.errorMessageHandler);
 	    } else {
 	      console.log("Geolocation is not supported by this browser.");
 	    }
 	  },
 
 	  loadWeatherInfo: function loadWeatherInfo(position) {
-	    console.log("Latitude: " + position.coords.latitude);
-	    console.log("Longitude: " + position.coords.longitude);
 
 	    var self = this;
 
@@ -19806,7 +19804,6 @@
 	      self.handleLoadWeatherInfo(json);
 	    }).fail(function (jqxhr, textStatus, error) {
 	      var err = textStatus + ", " + error;
-	      console.log("Request Failed: " + err);
 	      self.handleError(error);
 	    });
 	  },
@@ -19816,13 +19813,29 @@
 	      city: weatherInfo.cityName,
 	      currently: weatherInfo.currently
 	    });
-	    showWeather();
 	  },
 
 	  handleError: function handleError(errorObj) {
 	    this.setState({
 	      error: errorObj
 	    });
+	  },
+
+	  errorMessageHandler: function errorMessageHandler(error) {
+	    switch (error.code) {
+	      case error.PERMISSION_DENIED:
+	        this.handleError({ code: 1, message: "User denied the request for Geolocation." });
+	        break;
+	      case error.POSITION_UNAVAILABLE:
+	        this.handleError({ code: 1, message: "Location information is unavailable." });
+	        break;
+	      case error.TIMEOUT:
+	        this.handleError({ code: 1, message: "The request to get user location timed out." });
+	        break;
+	      case error.UNKNOWN_ERROR:
+	        this.handleError({ code: 1, message: "An unknown error occurred." });
+	        break;
+	    }
 	  },
 
 	  render: function render() {

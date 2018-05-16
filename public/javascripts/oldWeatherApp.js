@@ -8,22 +8,6 @@ function getLocation() {
 }
 
 
-function error(error) {
-  switch(error.code) {
-    case error.PERMISSION_DENIED:
-      showError("User denied the request for Geolocation.");
-      break;
-    case error.POSITION_UNAVAILABLE:
-      showError("Location information is unavailable.");
-      break;
-    case error.TIMEOUT:
-      showError("The request to get user location timed out.");
-      break;
-    case error.UNKNOWN_ERROR:
-      showError("An unknown error occurred.");
-      break;
-  }
-}
 
 
 function loadWeatherForecast(position) {
@@ -50,22 +34,9 @@ function parseWeatherJson(weatherJson) {
   $('#weather-temp').html( parseInt(weatherJson.temperature) + '°');
   $('#weather-unit').html('c');
 
-  showWeather();
-
 }
 
 
-function showWeather() {
-  // $('#loader').addClass('hide');
-  // $('#weatherInformation').removeClass('hide');
-}
-
-
-function showError(errorMessage) {
-  // $('#errorMessage').html(errorMessage);
-  // $('#loader').addClass('hide');
-  // $('#errorContainer').removeClass('hide');
-}
 
 
 // $( document ).ready(function() {
