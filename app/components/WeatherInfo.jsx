@@ -1,10 +1,9 @@
-const React = require('react');
+import React, { Component } from 'react'
 
-const WeatherInfo = React.createClass({
-  render: function () {
+class WeatherInfo extends Component {
+  render() {
 
     let city = this.props.city;
-    // let currently ;
 
     let {summary, temperature, apparentTemperature, icon} = this.props.currently;
 
@@ -29,7 +28,9 @@ const WeatherInfo = React.createClass({
 
       </main>
     )
-  }
-});
 
-module.exports = WeatherInfo;
+  }
+
+}
+
+export default WeatherInfo

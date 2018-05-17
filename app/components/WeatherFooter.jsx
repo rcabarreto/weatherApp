@@ -1,7 +1,8 @@
-const React = require('react');
+import React, { Component } from 'react'
 
-const WeatherFooter = React.createClass({
-  render: function () {
+class WeatherFooter extends Component {
+  render() {
+
     return (
       <footer className="mastfoot mt-auto">
         <div className="inner">
@@ -9,7 +10,9 @@ const WeatherFooter = React.createClass({
         </div>
       </footer>
     )
-  }
-});
 
-module.exports = WeatherFooter;
+  }
+
+}
+
+export default WeatherFooter

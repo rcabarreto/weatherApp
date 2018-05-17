@@ -1,13 +1,16 @@
-const React = require('react');
+import React, { Component } from 'react'
 
-const WeatherLoader = React.createClass({
-  render: function () {
+class WeatherLoader extends Component {
+  render() {
+
     return (
       <main id="loader" role="loader" className="inner cover">
         <p id="loader" className="lead"><img src="/images/ajax-loader-white.gif"/></p>
       </main>
     )
-  }
-});
 
-module.exports = WeatherLoader;
+  }
+
+}
+
+export default WeatherLoader

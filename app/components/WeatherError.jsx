@@ -1,7 +1,7 @@
-const React = require('react');
+import React, { Component } from 'react'
 
-const WeatherError = React.createClass({
-  render: function () {
+class WeatherError extends Component {
+  render() {
 
     let error = this.props.error;
 
@@ -12,6 +12,7 @@ const WeatherError = React.createClass({
       </main>
     )
   }
-});
 
-module.exports = WeatherError;
+}
+
+export default WeatherError

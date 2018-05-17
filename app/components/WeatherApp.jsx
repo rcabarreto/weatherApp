@@ -1,45 +1,46 @@
-const React = require('react');
+import React, { Component } from 'react'
+
+import WeatherHeader from './WeatherHeader'
+import WeatherLoader from './WeatherLoader'
+import WeatherInfo   from './WeatherInfo'
+import WeatherFooter from './WeatherFooter'
+import WeatherError  from './WeatherError'
+
+
 const _ = require('underscore');
 
-const WeatherHeader = require('./WeatherHeader');
-const WeatherLoader = require('./WeatherLoader');
-const WeatherInfo   = require('./WeatherInfo');
-const WeatherFooter = require('./WeatherFooter');
-const WeatherError  = require('./WeatherError');
 
-const WeatherApp = React.createClass({
+class WeatherApp extends Component {
 
-  componentDidMount: function() {
-    this.getLocation();
-  },
-
-  getDefaultProps: function () {
-    return {
-      title: 'Tiny Weather App',
-      city: '',
-      error: {},
-      currently: {}
-    };
-  },
-
-  getInitialState: function () {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       title: this.props.title,
       city: this.props.city,
       error: this.props.error,
       currently: this.props.currently
     };
-  },
 
-  getLocation: function () {
+    this.loadWeatherInfo = this.loadWeatherInfo.bind(this)
+
+  }
+
+  componentDidMount() {
+    this.getLocation();
+  }
+
+  getLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(this.loadWeatherInfo, this.errorMessageHandler);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
-  },
+  }
 
-  loadWeatherInfo: function (position) {
+  loadWeatherInfo(position) {
+
+    console.log('Latitude:', position.coords.latitude);
+    console.log('Longitude:', position.coords.longitude);
 
     let self = this;
 
@@ -52,22 +53,22 @@ const WeatherApp = React.createClass({
         self.handleError(error);
       });
 
-  },
+  }
 
-  handleLoadWeatherInfo: function (weatherInfo) {
+  handleLoadWeatherInfo(weatherInfo) {
     this.setState({
       city: weatherInfo.cityName,
       currently: weatherInfo.currently
     });
-  },
+  }
 
-  handleError: function (errorObj) {
+  handleError(errorObj) {
     this.setState({
       error: errorObj
     });
-  },
+  }
 
-  errorMessageHandler: function (error) {
+  errorMessageHandler(error) {
     switch(error.code) {
       case error.PERMISSION_DENIED:
         this.handleError({ code: 1, message: "User denied the request for Geolocation."});
@@ -82,9 +83,9 @@ const WeatherApp = React.createClass({
         this.handleError({ code: 1, message: "An unknown error occurred."});
         break;
     }
-  },
+  }
 
-  render: function () {
+  render() {
 
     let title = this.state.title;
     let city = this.state.city;
@@ -109,6 +110,16 @@ const WeatherApp = React.createClass({
       </div>
     );
   }
-});
 
-module.exports = WeatherApp;
+}
+
+
+WeatherApp.defaultProps = {
+  title: 'Tiny Weather App',
+  city: '',
+  error: {},
+  currently: {}
+};
+
+
+export default WeatherApp

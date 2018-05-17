@@ -1,7 +1,8 @@
-const React = require('react');
+import React, { Component } from 'react'
 
-const WeatherHeader = React.createClass({
-  render: function () {
+class WeatherHeader extends Component {
+  render() {
+
     let title = this.props.title;
     return (
       <header className="masthead mb-auto">
@@ -15,7 +16,9 @@ const WeatherHeader = React.createClass({
         </div>
       </header>
     )
-  }
-});
 
-module.exports = WeatherHeader;
+  }
+
+}
+
+export default WeatherHeader
