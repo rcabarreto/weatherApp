@@ -1,10 +1,12 @@
+'use strict';
+
 import React, { Component } from 'react'
 
-import WeatherHeader from './WeatherHeader'
-import WeatherLoader from './WeatherLoader'
-import WeatherInfo   from './WeatherInfo'
-import WeatherFooter from './WeatherFooter'
-import WeatherError  from './WeatherError'
+import Header from './WeatherHeader'
+import Footer from './WeatherFooter'
+import Loader from './WeatherLoader'
+import Info   from './WeatherInfo'
+import Error  from './WeatherError'
 
 
 const _ = require('underscore');
@@ -44,7 +46,7 @@ class WeatherApp extends Component {
 
     let self = this;
 
-    $.getJSON( "/forecast", { lat: position.coords.latitude, lgn: position.coords.longitude } )
+    $.getJSON('/api/forecast', { lat: position.coords.latitude, lgn: position.coords.longitude } )
       .done(function(json) {
         self.handleLoadWeatherInfo(json);
       })
@@ -96,15 +98,15 @@ class WeatherApp extends Component {
       <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ currently.icon}>
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-          <WeatherHeader title={title}/>
+          <Header title={title}/>
 
-          {!_.isEmpty(error) && <WeatherError error={error}/>}
+          {!_.isEmpty(error) && <Error error={error}/>}
 
-          {!_.isEmpty(currently) && <WeatherInfo city={city} currently={currently}/>}
+          {!_.isEmpty(currently) && <Info city={city} currently={currently}/>}
 
-          {_.isEmpty(currently) && _.isEmpty(error) && <WeatherLoader/>}
+          {_.isEmpty(currently) && _.isEmpty(error) && <Loader/>}
 
-          <WeatherFooter onNewTitle={this.getLocation}/>
+          <Footer onNewTitle={this.getLocation}/>
 
         </div>
       </div>
