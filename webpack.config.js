@@ -1,3 +1,5 @@
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack');
 const path = require('path');
 const envFile = require('node-env-file');
@@ -19,7 +21,16 @@ const config = {
     'bootstrap',
     './app/app.jsx'
   ],
+  output: {
+    filename: '[name].[hash].js',
+    path: path.resolve('./public'),
+  },
   plugins: [
+    new HtmlWebPackPlugin({
+      template: './app/template/index.html',
+      title: 'App Title'
+    }),
+    new CleanWebpackPlugin(['public']),
     new webpack.ProvidePlugin({
       '$': 'jquery',
       'jQuery': 'jquery'
@@ -34,10 +45,6 @@ const config = {
       }
     })
   ],
-  output: {
-    filename: '[name].js',
-    path: path.resolve('./public'),
-  },
   resolve: {
     modules: ["node_modules"],
     extensions: ['.js', '.jsx']
@@ -65,6 +72,16 @@ const config = {
         }, {
           loader: 'sass-loader'
         }],
+      },
+      {
+        test: /\.(gif|png|jpe?g)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/'
+          }
+        }]
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,

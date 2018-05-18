@@ -7,12 +7,11 @@ class WeatherLoader extends Component {
 
     return (
       <main id="loader" role="loader" className="inner cover">
-        <p id="loader" className="lead"><img src="/images/ajax-loader-white.gif"/></p>
+        <p id="loader" className="lead"><img src={require('../images/ajax-loader-white.gif')}/></p>
       </main>
     )
 
   }
-
 }
 
 export default WeatherLoader

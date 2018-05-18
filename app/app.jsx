@@ -6,8 +6,7 @@ import WeatherApp from './components/WeatherApp'
 
 import './styles/app.scss'
 
-
 ReactDOM.render(
-  <WeatherApp/>,
+  <WeatherApp />,
   document.getElementById('weatherApp')
 );
