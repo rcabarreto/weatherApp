@@ -27,6 +27,8 @@ You can get more information here: https://developers.google.com/maps/documentat
 You'll also need a valid key for the Dark Aky API, more information here:
 https://darksky.net/dev/account 
 
+Once you have both API Keys, just run the following command to start the application.
+
 To run the app, in Linux, you can run the following command on your console, using your personal API KEY:
 
 ```
