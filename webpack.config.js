@@ -1,8 +1,9 @@
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebPackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack');
 const path = require('path');
 const envFile = require('node-env-file');
+
+const CleanWebpackPlugin = require('clean-webpack-plugin')
+const HtmlWebPackPlugin = require('html-webpack-plugin')
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -16,9 +17,7 @@ try {
 const config = {
   mode: process.env.NODE_ENV,
   entry: [
-    'jquery',
-    'popper.js',
-    'bootstrap',
+    'script-loader!jquery/dist/jquery.min.js',
     './app/app.jsx'
   ],
   output: {
@@ -46,7 +45,10 @@ const config = {
     })
   ],
   resolve: {
-    modules: ["node_modules"],
+    modules: [
+      'node_modules',
+      './app'
+    ],
     extensions: ['.js', '.jsx']
   },
   module: {
@@ -78,9 +80,14 @@ const config = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: '[name].[ext]',
+            name: '[hash].[ext]',
             outputPath: 'images/'
           }
+        },{
+          loader: 'image-webpack-loader',
+          options: {
+            bypassOnDebug: true,
+          },
         }]
       },
       {
