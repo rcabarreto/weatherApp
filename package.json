@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "WEATHER_API_KEY=xxxxxxxxxxx MAPS_API_KEY=xxxxxxxxxxx node ./bin/www"
+    "start": "node ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",

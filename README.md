@@ -4,6 +4,50 @@
 
 This is a very small Weather application built with React and Node.js just to show of some of my skills as a Fullstack Web developer. 
 
+This little app was built using a Node.js/Express server and a React front-end. When you load the app, it'll get the location from your web browser, fetch locale information from Google Maps API and then fetch weather info from DarkSky API.
+
+
+### Installing
+
+First, download the project, then cd into the project and install dependencies.
+
+```
+$ git clone https://github.com/rcabarreto/weatherApp.git weatherApp/
+$ cd weatherApp/
+$ npm install
+```
+
+
+### Configuring
+
+You need to configure some parameters for the application to work properly. First you need to have a valid Google Maps API Key and access to the Maps API. 
+
+You can get more information here: https://developers.google.com/maps/documentation/javascript/get-api-key
+
+You'll also need a valid key for the Dark Aky API, more information here:
+https://darksky.net/dev/account 
+
+To run the app, in Linux, you can run the following command on your console, using your personal API KEY:
+
+```
+$ export WEATHER_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX
+$ export MAPS_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX
+$ npm start
+```
+
+Or just run:
+
+```
+$ WEATHER_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX MAPS_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX node bin/www
+```
+
+After you start the application, just open you prefered web browser and go to:
+
+```
+localhost:3000
+```
+
+
 ### Prerequisites
 
 You need to have Node installed to run this project.
@@ -25,42 +69,6 @@ Output
 v8.0.0
 ```
 
-### Installing
-
-First, download the project, then cd into the project and install dependencies.
-
-```
-$ git clone https://github.com/rcabarreto/weatherApp.git weatherApp/
-$ cd weatherApp/
-$ npm install
-```
-
-### Configuring
-
-You need to configure some parameters for the application to work properly. First you need to have a valid Google Maps API Key and access to the Maps API. 
-
-You can get more information here: https://developers.google.com/maps/documentation/javascript/get-api-key
-
-You'll also need a valid key for the Dark Aky API, more information here:
-https://darksky.net/dev/account 
-
-To run a test in text mode, you can use the command:
-
-```
-$ weatherApiKey=xxxxxxxx googleMapsApiKey=xxxxxxxxx node bin/www
-```
-
-You can also edit you local package.json file and add the API Keys there, then run:
-
-```
-$ npm start
-```
-
-After you start the application, just open you prefered web browser and go to:
-
-```
-localhost:3000
-```
 
 ## Built With
 
@@ -68,6 +76,8 @@ localhost:3000
 * [Bootstrap 4](https://getbootstrap.com)
 * [Node.js](https://nodejs.org/en/about/)
 * [Express.js](http://expressjs.com/pt-br/starter/installing.html)
+* [Babel](https://babeljs.io/)
+* [WebPack](https://webpack.js.org/)
 
 
 ## License
