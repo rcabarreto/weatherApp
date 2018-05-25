@@ -47,8 +47,15 @@ const config = {
   resolve: {
     modules: [
       'node_modules',
-      './app'
+      './app/components',
+      './app/api'
     ],
+    alias: {
+      app: 'app',
+      applicationStyles: path.resolve(__dirname, 'app/styles/app.scss'),
+      reducers: path.resolve(__dirname, 'app/reducers/reducers.jsx'),
+      configureStore: path.resolve(__dirname, 'app/store/configureStore.jsx')
+    },
     extensions: ['.js', '.jsx']
   },
   module: {

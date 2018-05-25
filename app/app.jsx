@@ -6,6 +6,9 @@ import WeatherApp from './components/WeatherApp'
 
 import './styles/app.scss'
 
+var store = require('configureStore').configure();
+
+
 ReactDOM.render(
   <WeatherApp />,
   document.getElementById('weatherApp')
