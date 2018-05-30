@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 
 class WeatherFooter extends Component {
   render() {
-
     return (
       <footer className="mastfoot mt-auto">
         <div className="inner">
@@ -12,9 +11,7 @@ class WeatherFooter extends Component {
         </div>
       </footer>
     )
-
   }
-
 }
 
 export default WeatherFooter

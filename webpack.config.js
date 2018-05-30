@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const envFile = require('node-env-file');
 
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebPackPlugin = require('html-webpack-plugin')
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
@@ -12,7 +12,6 @@ try {
 } catch (e) {
 
 }
-
 
 const config = {
   mode: process.env.NODE_ENV,
@@ -38,9 +37,7 @@ const config = {
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         API_KEY: JSON.stringify(process.env.API_KEY),
-        AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN),
-        DATABASE_URL: JSON.stringify(process.env.DATABASE_URL),
-        STORAGE_BUCKET: JSON.stringify(process.env.STORAGE_BUCKET)
+        AUTH_DOMAIN: JSON.stringify(process.env.AUTH_DOMAIN)
       }
     })
   ],
@@ -53,6 +50,7 @@ const config = {
     alias: {
       app: 'app',
       applicationStyles: path.resolve(__dirname, 'app/styles/app.scss'),
+      actions: path.resolve(__dirname, 'app/actions/actions.jsx'),
       reducers: path.resolve(__dirname, 'app/reducers/reducers.jsx'),
       configureStore: path.resolve(__dirname, 'app/store/configureStore.jsx')
     },

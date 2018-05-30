@@ -1,11 +1,15 @@
-'use strict';
 
 import React, { Component } from 'react'
+import {connect} from "react-redux";
 
 class WeatherError extends Component {
   render() {
 
-    let error = this.props.error;
+    let {error} = this.props;
+
+    if (!error.show) {
+      return null;
+    }
 
     return (
       <main id="errorContainer" role="loader" className="inner cover">
@@ -17,4 +21,10 @@ class WeatherError extends Component {
 
 }
 
-export default WeatherError
+export default connect(
+  (state) => {
+    return {
+      error: state.error
+    }
+  }
+)(WeatherError);

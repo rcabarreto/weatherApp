@@ -1,6 +1,7 @@
 'use strict';
 
 import React, { Component } from 'react'
+import * as Redux from 'react-redux';
 
 import Header from './WeatherHeader'
 import Footer from './WeatherFooter'
@@ -8,6 +9,7 @@ import Loader from './WeatherLoader'
 import Info   from './WeatherInfo'
 import Error  from './WeatherError'
 
+import * as actions from 'actions'
 
 const _ = require('underscore');
 
@@ -16,18 +18,12 @@ class WeatherApp extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      title: this.props.title,
-      city: this.props.city,
-      error: this.props.error,
-      currently: this.props.currently
-    };
-
     this.loadWeatherInfo = this.loadWeatherInfo.bind(this)
-
   }
 
   componentDidMount() {
+    let {dispatch} = this.props;
+    dispatch(actions.isLoadingAction());
     this.getLocation();
   }
 
@@ -52,76 +48,66 @@ class WeatherApp extends Component {
       })
       .fail(function( jqxhr, textStatus, error ) {
         let err = textStatus + ", " + error;
-        self.handleError(error);
+        let errorObj = JSON.parse(jqxhr.responseText);
+        self.handleError(errorObj);
       });
-
   }
 
   handleLoadWeatherInfo(weatherInfo) {
-    this.setState({
-      city: weatherInfo.cityName,
-      currently: weatherInfo.currently
-    });
+    let {dispatch} = this.props;
+
+    dispatch(actions.setLocation(weatherInfo.cityName));
+    dispatch(actions.setWeatherInfo(weatherInfo.currently));
+    dispatch(actions.isLoadingAction());
   }
 
   handleError(errorObj) {
-    this.setState({
-      error: errorObj
-    });
+    let {dispatch} = this.props;
+    dispatch(actions.showErrorMessage( errorObj ));
+    dispatch(actions.isLoadingAction());
   }
 
   errorMessageHandler(error) {
     switch(error.code) {
       case error.PERMISSION_DENIED:
-        this.handleError({ code: 1, message: "User denied the request for Geolocation."});
+        this.handleError({ code: 110, message: "User denied the request for Geolocation."});
         break;
       case error.POSITION_UNAVAILABLE:
-        this.handleError({ code: 1, message: "Location information is unavailable."});
+        this.handleError({ code: 112, message: "Location information is unavailable."});
         break;
       case error.TIMEOUT:
-        this.handleError({ code: 1, message: "The request to get user location timed out."});
+        this.handleError({ code: 113, message: "The request to get user location timed out."});
         break;
       case error.UNKNOWN_ERROR:
-        this.handleError({ code: 1, message: "An unknown error occurred."});
+        this.handleError({ code: 999, message: "An unknown error occurred."});
         break;
     }
   }
 
   render() {
 
-    let title = this.state.title;
-    let city = this.state.city;
-    let error = this.state.error;
-    let currently = this.state.currently;
+    let {weather} = this.props;
 
     return (
-      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ currently.icon}>
+      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ weather.icon}>
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
 
-          <Header title={title}/>
-
-          {!_.isEmpty(error) && <Error error={error}/>}
-
-          {!_.isEmpty(currently) && <Info city={city} currently={currently}/>}
-
-          {_.isEmpty(currently) && _.isEmpty(error) && <Loader/>}
-
-          <Footer onNewTitle={this.getLocation}/>
+          <Header/>
+          <Loader/>
+          <Info/>
+          <Error/>
+          <Footer/>
 
         </div>
       </div>
     );
   }
-
 }
 
-
-WeatherApp.defaultProps = {
-  title: 'Tiny Weather App',
-  city: '',
-  error: {},
-  currently: {}
-};
-
-
-export default WeatherApp
+export default Redux.connect(
+  (state) => {
+    return {
+      weather: state.weather
+    }
+  }
+)(WeatherApp)
