@@ -74,12 +74,17 @@ v8.0.0
 
 ## Built With
 
-* [React](https://reactjs.org/)
-* [Bootstrap 4](https://getbootstrap.com)
-* [Node.js](https://nodejs.org/en/about/)
-* [Express.js](http://expressjs.com/pt-br/starter/installing.html)
+### Front-end
+* [React](https://getbootstrap.com/docs/3.3/)
+* [Redux](https://getbootstrap.com/docs/3.3/)
+* [Bootstrap 4](https://getbootstrap.com/docs/3.3/)
 * [Babel](https://babeljs.io/)
 * [WebPack](https://webpack.js.org/)
+
+### Back-end
+* [Node.js](https://nodejs.org/en/about/)
+* [Express.js](http://expressjs.com/pt-br/starter/installing.html)
+* [Docker](https://www.docker.com/docker-community/)
 
 
 ## License
