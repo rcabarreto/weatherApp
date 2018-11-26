@@ -16,6 +16,8 @@ module.exports = () => {
 
     maps.reverseGeoCode(latitude, longitude).then(mapsData => {
 
+      console.log(mapsData);
+      
       let addressComponents = mapsData.results[0].address_components;
       let addressName;
 
