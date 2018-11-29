@@ -5,13 +5,15 @@ const envFile = require('node-env-file');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
 try {
-  envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV + '.env'));
+  envFile(path.join(__dirname, '.env'));
 } catch (e) {
   console.log(e);
 }
+
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+console.log('Compilation mode:', process.env.NODE_ENV);
 
 const config = {
   mode: process.env.NODE_ENV,
@@ -20,7 +22,7 @@ const config = {
     './app/app.jsx'
   ],
   output: {
-    filename: '[name].[hash].js',
+    filename: '[name].js',
     path: path.resolve('./public'),
   },
   plugins: [
