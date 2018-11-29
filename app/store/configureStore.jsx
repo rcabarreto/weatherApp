@@ -1,12 +1,12 @@
 import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import {isLoadingReducer, locationReducer, weatherReducer, errorReducer} from 'reducers'
+import {loaderReducer, locationReducer, weatherReducer, errorReducer} from 'reducers'
 
 export var configure = (initialState = {}) => {
 
   let reducer = combineReducers({
-    isLoading: isLoadingReducer,
+    loader: loaderReducer,
     location: locationReducer,
     weather: weatherReducer,
     error: errorReducer

@@ -1,10 +1,14 @@
 
 const uuid = require('node-uuid');
 
-export var isLoadingReducer = (state = false, action) => {
+export var loaderReducer = (state = false, action) => {
   switch (action.type) {
-    case 'TOGGLE_SHOW_LOADER':
+    case 'TOGGLE_LOADER':
       return !state;
+    case 'SHOW_LOADER':
+      return true;
+    case 'HIDE_LOADER':
+      return false;
     default:
       return state;
   }

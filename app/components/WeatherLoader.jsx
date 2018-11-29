@@ -22,7 +22,7 @@ class WeatherLoader extends Component {
 export default connect(
   (state) => {
     return {
-      isLoading: state.isLoading
+      isLoading: state.loader
     }
   }
 )(WeatherLoader);

@@ -9,7 +9,7 @@ import Loader from './WeatherLoader'
 import Info   from './WeatherInfo'
 import Error  from './WeatherError'
 
-import * as actions from 'actions'
+import * as actions from '../actions/actions'
 
 const _ = require('underscore');
 
@@ -23,7 +23,7 @@ class WeatherApp extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch(actions.isLoadingAction());
+    dispatch(actions.toggleLoader());
     this.getLocation();
   }
 
@@ -58,13 +58,13 @@ class WeatherApp extends Component {
 
     dispatch(actions.setLocation(weatherInfo.cityName));
     dispatch(actions.setWeatherInfo(weatherInfo.currently));
-    dispatch(actions.isLoadingAction());
+    dispatch(actions.toggleLoader());
   }
 
   handleError(errorObj) {
     let {dispatch} = this.props;
     dispatch(actions.showErrorMessage( errorObj ));
-    dispatch(actions.isLoadingAction());
+    dispatch(actions.toggleLoader());
   }
 
   errorMessageHandler(error) {

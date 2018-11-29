@@ -1,5 +1,5 @@
 
-export var isLoadingAction = () => {
+export var toggleLoader = () => {
   return {
     type: 'TOGGLE_SHOW_LOADER'
   }
