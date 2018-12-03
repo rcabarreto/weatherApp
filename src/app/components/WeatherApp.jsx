@@ -14,7 +14,6 @@ import api from '../api/WeatherAPI'
 
 const _ = require('underscore');
 
-
 class WeatherApp extends Component {
 
   constructor(props) {
@@ -30,30 +29,26 @@ class WeatherApp extends Component {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.checkCoordenates, this.errorMessageHandler);
+      navigator.geolocation.getCurrentPosition(this.checkCoordinates, this.errorMessageHandler);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   }
 
-  checkCoordenates(position) {
-
+  checkCoordinates = (position) => {
     console.log('Latitude:', position.coords.latitude);
     console.log('Longitude:', position.coords.longitude);
 
     // do some checking and if everythng ok, call api
 
-    let self = this;
-
     api.loadWeatherInfo(position.coords.latitude, position.coords.longitude).then(response => {
-      self.handleLoadWeatherInfo(json);
+      console.log(response);
+      this.handleLoadWeatherInfo(response);
     }, err => {
-      let err = textStatus + ", " + error;
-      let errorObj = JSON.parse(jqxhr.responseText);
-      self.handleError(errorObj);
+      this.handleError(err);
     });
 
-  },
+  }
 
   loadWeatherInfo(position) {
 
@@ -76,7 +71,10 @@ class WeatherApp extends Component {
   handleLoadWeatherInfo(weatherInfo) {
     let {dispatch} = this.props;
 
-    dispatch(actions.setLocation(weatherInfo.cityName));
+    dispatch(actions.setLocation(weatherInfo.address));
+    // state
+    // country
+
     dispatch(actions.setWeatherInfo(weatherInfo.currently));
     dispatch(actions.toggleLoader());
   }

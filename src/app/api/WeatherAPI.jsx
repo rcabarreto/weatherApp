@@ -11,8 +11,11 @@ const api = {
   loadWeatherInfo(latitude, longitude) {
     return new Promise((resolve, reject) => {
       let apiUrl = `${LOCATIONIQ_API_URL}?key=${LOCATIONIQ_API_KEY}&lat=${latitude}&lon=${longitude}&format=${LOCATIONIQ_API_RETURN_FORMAT}`;
-      axios.post(apiUrl, userData).then(response => {
-        resolve(response);
+
+      console.log(apiUrl);
+
+      axios.get(apiUrl).then(response => {
+        resolve(response.data);
       }).catch(error => {
         reject(error);
       });

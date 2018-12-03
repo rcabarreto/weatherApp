@@ -5,10 +5,12 @@ export var toggleLoader = () => {
   }
 };
 
-export var setLocation = (cityName) => {
+export var setLocation = (locationAddr) => {
   return {
     type: 'UPDATE_LOCATION',
-    cityName
+    city: locationAddr.city,
+    state: locationAddr.state,
+    country: locationAddr.country
   }
 };
 

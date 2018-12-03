@@ -60,3 +60,5 @@ typings/
 config/
 public/
 start.sh
+.cache
+dist/
