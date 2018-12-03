@@ -2,9 +2,9 @@
 
 ## Description
 
-This is a very small Weather application built with React and Node.js just to show of some of my skills as a Fullstack Web developer. 
+This is a very small Weather application built with React just to show of some of my skills as a Fullstack Web developer.
 
-This little app was built using a Node.js/Express server and a React front-end. When you load the app, it'll get the location from your web browser, fetch locale information from Google Maps API and then fetch weather info from DarkSky API.
+This little app was built using React front-end. When you load the app, it'll get the location from your web browser, fetch location information from LocationIQ and then fetches the weather from OpenWeatherMap.
 
 
 ### Installing
@@ -14,39 +14,36 @@ First, download the project, then cd into the project and install dependencies.
 ```
 $ git clone https://github.com/rcabarreto/weatherApp.git weatherApp/
 $ cd weatherApp/
-$ npm install
+$ yarn install
 ```
 
 
 ### Configuring
 
-You need to configure some parameters for the application to work properly. First you need to have a valid Google Maps API Key and access to the Maps API. 
+You need to configure some parameters for the application to work properly. First you need to have a valid LocationIQ api key.
 
-You can get more information here: https://developers.google.com/maps/documentation/javascript/get-api-key
+You can get more information here: https://locationiq.com/
 
-You'll also need a valid key for the Dark Aky API, more information here:
-https://darksky.net/dev/account 
+You'll also need a valid key for the OpenWeatherMap API, more information here: https://openweathermap.org/api 
 
-Once you have both API Keys, just run the following command to start the application.
-
-To run the app, in Linux, you can run the following command on your console, using your personal API KEY:
+Once you have both API Keys, you can create a .env file on the root folder. The env file will look like this:
 
 ```
-$ export WEATHER_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX
-$ export MAPS_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX
-$ npm start
+NODE_ENV=development
+WEATHER_API_KEY=[YOUR WEATHER API KEY]
+GEOCODE_API_KEY=[YOUR GEOCODE API KEY]
 ```
 
-Or just run:
+Once the .env file is in place, just run:
 
 ```
-$ WEATHER_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX MAPS_API_KEY=XXXXXXXXXXXXXXXXXXXXXXX node bin/www
+$ yarn dev
 ```
 
 After you start the application, just open you prefered web browser and go to:
 
 ```
-localhost:3000
+localhost:1234
 ```
 
 
@@ -79,12 +76,7 @@ v8.0.0
 * [Redux](https://redux.js.org/)
 * [Bootstrap 4](https://getbootstrap.com/docs/3.3/)
 * [Babel](https://babeljs.io/)
-* [WebPack](https://webpack.js.org/)
-
-### Back-end
-* [Node.js](https://nodejs.org/en/about/)
-* [Express.js](http://expressjs.com/pt-br/starter/installing.html)
-* [Docker](https://www.docker.com/docker-community/)
+* [Parcel](https://parceljs.org/)
 
 
 ## License
