@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "build": "webpack",
-    "dev": "webpack -w"
+    "build": "parcel ./src/index.html",
+    "dev": "parcel ./src/index.html"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "cookie-parser": "~1.4.3",
     "debug": "^3.1.0",
     "dotenv": "^6.1.0",
@@ -35,35 +35,15 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "bootstrap": "^4.1.1",
-    "clean-webpack-plugin": "^0.1.19",
-    "css-loader": "^0.28.11",
     "deep-freeze-strict": "^1.1.1",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "expect": "^23.1.0",
-    "file-loader": "^1.1.11",
-    "gulp": "^3.9.1",
-    "html-loader": "^0.5.5",
-    "html-webpack-plugin": "^3.2.0",
-    "image-webpack-loader": "^4.2.0",
     "jest": "^22.4.3",
     "jquery": "^3.3.1",
-    "karma": "^2.0.3",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-mocha": "^1.3.0",
-    "karma-mocha-reporter": "^2.2.5",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^3.0.0",
-    "mocha": "^5.2.0",
     "node-sass": "^4.9.0",
+    "parcel-bundler": "^1.10.3",
     "popper.js": "^1.14.3",
-    "react-test-renderer": "^16.3.2",
-    "sass-loader": "^7.0.1",
-    "script-loader": "^0.7.2",
-    "style-loader": "^0.21.0",
-    "url-loader": "^1.0.1",
-    "webpack": "^4.8.1",
-    "webpack-cli": "^2.1.3",
-    "webpack-merge": "^4.1.2"
+    "react-test-renderer": "^16.3.2"
   }
 }
