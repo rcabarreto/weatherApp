@@ -1,8 +1,6 @@
-'use strict';
+import React from 'react'
 
-import React, { Component } from 'react'
-
-class WeatherHeader extends Component {
+class WeatherHeader extends React.Component {
   render() {
     return (
       <header className="masthead mb-auto">

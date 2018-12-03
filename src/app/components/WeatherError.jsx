@@ -1,8 +1,8 @@
+import React from 'react'
+import { connect } from "react-redux";
 
-import React, { Component } from 'react'
-import {connect} from "react-redux";
-
-class WeatherError extends Component {
+class WeatherError extends React.Component {
+  
   render() {
 
     let {error} = this.props;

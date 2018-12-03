@@ -1,5 +1,4 @@
 
-const uuid = require('node-uuid');
 
 export var loaderReducer = (state = false, action) => {
   switch (action.type) {

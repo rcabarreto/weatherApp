@@ -10,7 +10,6 @@ import Error  from './WeatherError'
 import * as actions from '../actions/actions'
 import api from '../api/WeatherAPI'
 
-const _ = require('underscore');
 
 class WeatherApp extends React.Component {
 
@@ -34,12 +33,8 @@ class WeatherApp extends React.Component {
 
   loadLocation = (position) => {
     api.loadLocationInfo(position.coords.latitude, position.coords.longitude).then(response => {
-      console.log(response);
       return this.handleLoadLocationInfo(response);
-      
     }).then(response => {
-      console.log('dddddd');
-      console.log(response);
       return api.loadWeatherByCityname(response.address.city, response.address.country_code);
     }).then(response => {
       this.handleLoadWeatherInfo(response);
@@ -59,7 +54,6 @@ class WeatherApp extends React.Component {
 
     if (weatherInfo.count > 0) {
       let weather = weatherInfo.list[0];
-      console.log(weather);
       dispatch(actions.setWeather(weather));
     }
     

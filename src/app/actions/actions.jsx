@@ -1,7 +1,7 @@
 
 export var toggleLoader = () => {
   return {
-    type: 'TOGGLE_SHOW_LOADER'
+    type: 'TOGGLE_LOADER'
   }
 };
 
