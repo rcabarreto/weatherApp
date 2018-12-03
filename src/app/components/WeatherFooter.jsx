@@ -1,17 +1,13 @@
-'use strict';
+import React from 'react'
 
-import React, { Component } from 'react'
-
-class WeatherFooter extends Component {
-  render() {
-    return (
-      <footer className="mastfoot mt-auto">
+const WeatherFooter = () => {
+  return (
+    <footer className="mastfoot mt-auto">
         <div className="inner">
-          <p><a href="https://darksky.net/poweredby/">Powered by Dark Sky</a></p>
+          <p>Geocoding by <a href="https://locationiq.com/">LocationIQ</a> and weather provided by <a href="https://openweathermap.org/">OpenWeatherMap</a></p>
         </div>
       </footer>
-    )
-  }
+  )
 }
 
 export default WeatherFooter

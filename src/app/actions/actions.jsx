@@ -8,20 +8,23 @@ export var toggleLoader = () => {
 export var setLocation = (locationAddr) => {
   return {
     type: 'UPDATE_LOCATION',
+    road: locationAddr.road,
+    suburb: locationAddr.suburb,
     city: locationAddr.city,
     state: locationAddr.state,
-    country: locationAddr.country
+    country: locationAddr.country,
+    country_code: locationAddr.country_code
   }
 };
 
-export var setWeatherInfo = (weather) => {
+export var setWeather = (weather) => {
   return {
     type: 'SET_WEATHER_INFO',
     show: true,
-    summary: weather.summary,
-    icon: weather.icon,
-    temperature: weather.temperature,
-    apparentTemperature: weather.apparentTemperature
+    summary: weather.weather[0].description,
+    icon: weather.weather[0].id,
+    temperature: weather.main.temp,
+    apparentTemperature: weather.main.temp
   }
 };
 

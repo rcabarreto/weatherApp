@@ -18,9 +18,12 @@ export var locationReducer = (state = {}, action) => {
   switch (action.type) {
     case 'UPDATE_LOCATION':
       return {
+        road: action.road,
+        suburb: action.suburb,
         city: action.city,
         state: action.state,
-        country: action.country
+        country: action.country,
+        country_code: action.country_code
       };
     default:
       return state;

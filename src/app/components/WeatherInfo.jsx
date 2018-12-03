@@ -1,8 +1,9 @@
 
-import React, { Component } from 'react'
-import {connect} from "react-redux";
+import React from 'react'
+import { connect } from "react-redux";
 
-class WeatherInfo extends Component {
+class WeatherInfo extends React.Component {
+
   render() {
 
     let {location, weather} = this.props;
@@ -18,7 +19,7 @@ class WeatherInfo extends Component {
         <h3>{weather.summary}</h3>
 
         <div id="currentWeather" className="metric-stat">
-          <span id="weather-icon" className={"wi wi-forecast-io-"+weather.icon} title={weather.summary}></span>
+          <span id="weather-icon" className={"wi wi-owm-"+weather.icon} title={weather.summary}></span>
           <span id="weather-temp" className="metric-stat-number">{parseInt(weather.temperature)}°</span>
           <span id="weather-unit" className="unit">c</span>
         </div>

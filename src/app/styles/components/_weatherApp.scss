@@ -1,3 +1,12 @@
+$thunderstorm: "../images/background/thunderstorm.jpg";
+$drizzle: "";
+$rain: "../images/background/rain.jpg";
+$snow: "../images/background/snow.jpg";
+$clear: "../images/background/clear-day.jpg";
+$clouds: "../images/background/cloudy.jpg";
+$fog: "../images/background/fog.jpg";
+$tornado: "../images/background/tornado.jpg";
+
 .weatherBackground {
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -20,6 +29,70 @@
 .weatherBackground.hail{ background-image: url('../images/background/hail.jpg'); }
 .weatherBackground.thunderstorm{ background-image: url('../images/background/thunderstorm.jpg'); }
 .weatherBackground.tornado{ background-image: url('../images/background/tornado.jpg'); }
+
+
+
+// OpenWeatherMap mappings
+.weatherBackground.owm-200{ background-image: url($thunderstorm); }
+.weatherBackground.owm-201{ background-image: url($thunderstorm); }
+.weatherBackground.owm-202{ background-image: url($thunderstorm); }
+.weatherBackground.owm-210{ background-image: url($thunderstorm); }
+.weatherBackground.owm-211{ background-image: url($thunderstorm); }
+.weatherBackground.owm-212{ background-image: url($thunderstorm); }
+.weatherBackground.owm-221{ background-image: url($thunderstorm); }
+.weatherBackground.owm-230{ background-image: url($thunderstorm); }
+.weatherBackground.owm-231{ background-image: url($thunderstorm); }
+.weatherBackground.owm-232{ background-image: url($thunderstorm); }
+
+.weatherBackground.owm-300{ background-image: url($rain); }
+.weatherBackground.owm-301{ background-image: url($rain); }
+.weatherBackground.owm-302{ background-image: url($rain); }
+.weatherBackground.owm-310{ background-image: url($rain); }
+.weatherBackground.owm-311{ background-image: url($rain); }
+.weatherBackground.owm-312{ background-image: url($rain); }
+.weatherBackground.owm-313{ background-image: url($rain); }
+.weatherBackground.owm-314{ background-image: url($rain); }
+.weatherBackground.owm-321{ background-image: url($rain); }
+
+.weatherBackground.owm-500{ background-image: url($rain); }
+.weatherBackground.owm-501{ background-image: url($rain); }
+.weatherBackground.owm-502{ background-image: url($rain); }
+.weatherBackground.owm-503{ background-image: url($rain); }
+.weatherBackground.owm-504{ background-image: url($rain); }
+.weatherBackground.owm-511{ background-image: url($rain); }
+.weatherBackground.owm-520{ background-image: url($rain); }
+.weatherBackground.owm-521{ background-image: url($rain); }
+.weatherBackground.owm-522{ background-image: url($rain); }
+.weatherBackground.owm-531{ background-image: url($rain); }
+
+.weatherBackground.owm-600{ background-image: url($snow); }
+.weatherBackground.owm-601{ background-image: url($snow); }
+.weatherBackground.owm-602{ background-image: url($snow); }
+.weatherBackground.owm-611{ background-image: url($snow); }
+.weatherBackground.owm-612{ background-image: url($snow); }
+.weatherBackground.owm-615{ background-image: url($snow); }
+.weatherBackground.owm-616{ background-image: url($snow); }
+.weatherBackground.owm-620{ background-image: url($snow); }
+.weatherBackground.owm-621{ background-image: url($snow); }
+.weatherBackground.owm-622{ background-image: url($snow); }
+
+.weatherBackground.owm-701{ background-image: url($fog); }
+.weatherBackground.owm-711{ background-image: url($fog); }
+.weatherBackground.owm-721{ background-image: url($fog); }
+.weatherBackground.owm-731{ background-image: url($fog); }
+.weatherBackground.owm-741{ background-image: url($fog); }
+.weatherBackground.owm-751{ background-image: url($fog); }
+.weatherBackground.owm-761{ background-image: url($fog); }
+.weatherBackground.owm-762{ background-image: url($rain); }
+.weatherBackground.owm-771{ background-image: url($rain); }
+.weatherBackground.owm-781{ background-image: url($tornado); }
+
+.weatherBackground.owm-800{ background-image: url($clear); }
+.weatherBackground.owm-801{ background-image: url($clear); }
+.weatherBackground.owm-802{ background-image: url($clear); }
+.weatherBackground.owm-803{ background-image: url($clear); }
+.weatherBackground.owm-804{ background-image: url($clear); }
+
 
 
 /*

@@ -1,6 +1,4 @@
-'use strict';
-
-import React, { Component } from 'react'
+import React from 'react'
 import * as Redux from 'react-redux';
 
 import Header from './WeatherHeader'
@@ -14,74 +12,57 @@ import api from '../api/WeatherAPI'
 
 const _ = require('underscore');
 
-class WeatherApp extends Component {
+class WeatherApp extends React.Component {
 
   constructor(props) {
     super(props);
-    this.loadWeatherInfo = this.loadWeatherInfo.bind(this)
   }
 
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch(actions.toggleLoader());
-    this.getLocation();
+    this.getCoordinates();
   }
 
-  getLocation() {
+  getCoordinates() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.checkCoordinates, this.errorMessageHandler);
+      navigator.geolocation.getCurrentPosition(this.loadLocation, this.errorMessageHandler);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   }
 
-  checkCoordinates = (position) => {
-    console.log('Latitude:', position.coords.latitude);
-    console.log('Longitude:', position.coords.longitude);
-
-    // do some checking and if everythng ok, call api
-
-    api.loadWeatherInfo(position.coords.latitude, position.coords.longitude).then(response => {
+  loadLocation = (position) => {
+    api.loadLocationInfo(position.coords.latitude, position.coords.longitude).then(response => {
       console.log(response);
+      return this.handleLoadLocationInfo(response);
+      
+    }).then(response => {
+      console.log('dddddd');
+      console.log(response);
+      return api.loadWeatherByCityname(response.address.city, response.address.country_code);
+    }).then(response => {
       this.handleLoadWeatherInfo(response);
-    }, err => {
+    }).catch(err => {
       this.handleError(err);
     });
-
   }
 
-  loadWeatherInfo(position) {
-
-    console.log('Latitude:', position.coords.latitude);
-    console.log('Longitude:', position.coords.longitude);
-
-    let self = this;
-
-    $.getJSON('/api/forecast', { lat: position.coords.latitude, lgn: position.coords.longitude } )
-      .done(function(json) {
-        self.handleLoadWeatherInfo(json);
-      })
-      .fail(function( jqxhr, textStatus, error ) {
-        let err = textStatus + ", " + error;
-        let errorObj = JSON.parse(jqxhr.responseText);
-        self.handleError(errorObj);
-      });
+  handleLoadLocationInfo = (locationInfo) => {
+    let {dispatch} = this.props;
+    dispatch(actions.setLocation(locationInfo.address));
+    return locationInfo;
   }
 
   handleLoadWeatherInfo(weatherInfo) {
     let {dispatch} = this.props;
 
-    dispatch(actions.setLocation(weatherInfo.address));
-    // state
-    // country
-
-    dispatch(actions.setWeatherInfo(weatherInfo.currently));
-    dispatch(actions.toggleLoader());
-  }
-
-  handleError(errorObj) {
-    let {dispatch} = this.props;
-    dispatch(actions.showErrorMessage( errorObj ));
+    if (weatherInfo.count > 0) {
+      let weather = weatherInfo.list[0];
+      console.log(weather);
+      dispatch(actions.setWeather(weather));
+    }
+    
     dispatch(actions.toggleLoader());
   }
 
@@ -102,20 +83,26 @@ class WeatherApp extends Component {
     }
   }
 
+  handleError(errorObj) {
+    let {dispatch} = this.props;
+    dispatch(actions.showErrorMessage( errorObj ));
+    dispatch(actions.toggleLoader());
+  }
+
+
+
   render() {
 
     let {weather} = this.props;
 
     return (
-      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column "+ weather.icon}>
+      <div className={"weatherBackground d-flex w-100 h-100 p-3 mx-auto flex-column owm-"+ weather.icon}>
         <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-
           <Header/>
           <Loader/>
           <Info/>
           <Error/>
           <Footer/>
-
         </div>
       </div>
     );
