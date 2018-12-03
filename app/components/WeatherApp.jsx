@@ -10,6 +10,7 @@ import Info   from './WeatherInfo'
 import Error  from './WeatherError'
 
 import * as actions from '../actions/actions'
+import api from '../api/WeatherAPI'
 
 const _ = require('underscore');
 
@@ -29,11 +30,30 @@ class WeatherApp extends Component {
 
   getLocation() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(this.loadWeatherInfo, this.errorMessageHandler);
+      navigator.geolocation.getCurrentPosition(this.checkCoordenates, this.errorMessageHandler);
     } else {
       console.log("Geolocation is not supported by this browser.");
     }
   }
+
+  checkCoordenates(position) {
+
+    console.log('Latitude:', position.coords.latitude);
+    console.log('Longitude:', position.coords.longitude);
+
+    // do some checking and if everythng ok, call api
+
+    let self = this;
+
+    api.loadWeatherInfo(position.coords.latitude, position.coords.longitude).then(response => {
+      self.handleLoadWeatherInfo(json);
+    }, err => {
+      let err = textStatus + ", " + error;
+      let errorObj = JSON.parse(jqxhr.responseText);
+      self.handleError(errorObj);
+    });
+
+  },
 
   loadWeatherInfo(position) {
 
