@@ -6,11 +6,11 @@ class WeatherHeader extends React.Component {
       <header className="masthead mb-auto">
         <div className="inner">
           <h3 className="masthead-brand">Tiny Weather App</h3>
-          <nav className="nav nav-masthead justify-content-center">
+          {/* <nav className="nav nav-masthead justify-content-center">
             <a className="nav-link active" href="#">Now</a>
             <a className="nav-link" href="#">Today</a>
             <a className="nav-link" href="#">This week</a>
-          </nav>
+          </nav> */}
         </div>
       </header>
     )

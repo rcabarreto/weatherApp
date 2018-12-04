@@ -4,7 +4,7 @@ const GEOCODE_API_URL = 'https://us1.locationiq.com/v1/reverse.php';
 const GEOCODE_API_KEY = process.env.GEOCODE_API_KEY || 'XXXXXX';
 const GEOCODE_API_RETURN_FORMAT = process.env.GEOCODE_API_RETURN_FORMAT || 'json';
 
-const WEATHER_API_URL = 'http://api.openweathermap.org/data/2.5/find';
+const WEATHER_API_URL = 'https://api.openweathermap.org/data/2.5/find';
 const WEATHER_API_KEY = process.env.WEATHER_API_KEY || 'XXXXXX';
 
 const api = {

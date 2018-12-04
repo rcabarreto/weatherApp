@@ -14,7 +14,7 @@ class WeatherInfo extends React.Component {
     return (
       <main id="weatherInformation" role="main" className="inner cover">
 
-        <h1 id="weatherTitle" className="cover-heading">{location.cityName}</h1>
+        <h1 id="weatherTitle" className="cover-heading">{location.city}, {location.country}</h1>
         <h3>{weather.summary}</h3>
 
         <div id="currentWeather" className="metric-stat">
