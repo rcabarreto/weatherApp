@@ -94,6 +94,11 @@ $tornado: "../images/background/tornado.jpg";
 .weatherBackground.owm-804{ background-image: url($clear); }
 
 
+// Customization for the footer
+.owm-800 footer p {
+  text-shadow: 1px 1px 2px #000000;
+}
+
 
 /*
  * Globals

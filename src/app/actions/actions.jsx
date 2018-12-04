@@ -24,7 +24,12 @@ export var setWeather = (weather) => {
     summary: weather.weather[0].description,
     icon: weather.weather[0].id,
     temperature: weather.main.temp,
-    apparentTemperature: weather.main.temp
+    apparentTemperature: weather.main.temp,
+    pressure: weather.main.pressure,
+    humidity: weather.main.humidity,
+    temp_min: weather.main.temp_min,
+    temp_max: weather.main.temp_max,
+    visibility: weather.visibility
   }
 };
 

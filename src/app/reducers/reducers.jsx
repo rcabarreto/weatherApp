@@ -37,7 +37,12 @@ export var weatherReducer = (state = {}, action) => {
         summary: action.summary,
         icon: action.icon,
         temperature: action.temperature,
-        apparentTemperature: action.apparentTemperature
+        apparentTemperature: action.apparentTemperature,
+        pressure: action.pressure,
+        humidity: action.humidity,
+        temp_min: action.temp_min,
+        temp_max: action.temp_max,
+        visibility: action.visibility
       };
     default:
       return state;
