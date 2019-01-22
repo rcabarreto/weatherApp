@@ -62,3 +62,4 @@ public/
 start.sh
 .cache
 dist/
+.history/

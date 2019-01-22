@@ -1,43 +1,8 @@
 
-export var toggleLoader = () => {
-  return {
-    type: 'TOGGLE_LOADER'
-  }
-};
+export const toggleLoader = () => ({ type: 'TOGGLE_LOADER' })
 
-export var setLocation = (locationAddr) => {
-  return {
-    type: 'UPDATE_LOCATION',
-    road: locationAddr.road,
-    suburb: locationAddr.suburb,
-    city: locationAddr.city,
-    state: locationAddr.state,
-    country: locationAddr.country,
-    country_code: locationAddr.country_code
-  }
-};
+export const setLocation = locationAddr => ({ type: 'UPDATE_LOCATION', locationAddr })
 
-export var setWeather = (weather) => {
-  return {
-    type: 'SET_WEATHER_INFO',
-    show: true,
-    summary: weather.weather[0].description,
-    icon: weather.weather[0].id,
-    temperature: weather.main.temp,
-    apparentTemperature: weather.main.temp,
-    pressure: weather.main.pressure,
-    humidity: weather.main.humidity,
-    temp_min: weather.main.temp_min,
-    temp_max: weather.main.temp_max,
-    visibility: weather.visibility
-  }
-};
+export const setWeather = weather => ({ type: 'SET_WEATHER_INFO', weather })
 
-export var showErrorMessage = (errorObj) => {
-  return {
-    type: 'UPDATE_ERROR_MESSAGE',
-    show: true,
-    code: errorObj.code,
-    message: errorObj.message
-  }
-};
+export const showErrorMessage = errorObj => ({ type: 'UPDATE_ERROR_MESSAGE', errorObj })
