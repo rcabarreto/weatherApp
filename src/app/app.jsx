@@ -3,9 +3,10 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import WeatherApp from './components/WeatherApp'
 
+import configureStore from './store/configureStore'
 import './styles/app.scss'
 
-const store = require('./store/configureStore').configure()
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>

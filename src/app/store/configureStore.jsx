@@ -1,21 +1,21 @@
-import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
-import {loaderReducer, locationReducer, weatherReducer, errorReducer} from '../reducers/reducers'
+import { loaderReducer, coordsReducer, locationReducer, weatherReducer, errorReducer } from '../reducers/reducers'
 
-export var configure = (initialState = {}) => {
-
-  let reducer = combineReducers({
+export default (initialState = {}) => {
+  const reducer = combineReducers({
     loader: loaderReducer,
+    coords: coordsReducer,
     location: locationReducer,
     weather: weatherReducer,
-    error: errorReducer
-  });
+    error: errorReducer,
+  })
 
-  let store = createStore(reducer, initialState, compose(
+  const store = createStore(reducer, initialState, compose(
     applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f
-  ));
+    window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f,
+  ))
 
-  return store;
-};
+  return store
+}

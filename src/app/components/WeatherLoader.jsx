@@ -1,28 +1,31 @@
 import React from 'react'
-import { connect } from "react-redux";
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 
-class WeatherLoader extends React.Component {
-  
-  render() {
+import loaderImage from '../images/ajax-loader-white.gif'
 
-    let {isLoading} = this.props;
+const WeatherLoader = (props) => {
+  const { location, weather } = props
 
-    if (!isLoading) {
-      return null;
-    }
-
-    return (
-      <main id="loader" role="loader" className="inner cover">
-        <p id="loader" className="lead"><img src={require('../images/ajax-loader-white.gif')}/></p>
-      </main>
-    )
+  if (location.country || weather.summary) {
+    return null
   }
+
+  return (
+    <main id="loader" className="inner cover">
+      <p id="loader" className="lead"><img alt="Loader" src={loaderImage} /></p>
+    </main>
+  )
+}
+
+WeatherLoader.propTypes = {
+  location: PropTypes.node.isRequired,
+  weather: PropTypes.node.isRequired,
 }
 
 export default connect(
-  (state) => {
-    return {
-      isLoading: state.loader
-    }
-  }
-)(WeatherLoader);
+  state => ({
+    location: state.location,
+    weather: state.weather,
+  }),
+)(WeatherLoader)

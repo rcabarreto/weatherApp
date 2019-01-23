@@ -13,9 +13,21 @@ export const loaderReducer = (state = false, action) => {
   }
 }
 
+export const coordsReducer = (state = {}, action) => {
+  switch (action.type) {
+  case 'SET_COORDS':
+    return {
+      latitude: action.position.coords.latitude,
+      longitude: action.position.coords.longitude,
+    }
+  default:
+    return state
+  }
+}
+
 export const locationReducer = (state = {}, action) => {
   switch (action.type) {
-  case 'UPDATE_LOCATION':
+  case 'SET_LOCATION':
     return {
       road: action.locationAddr.road,
       suburb: action.locationAddr.suburb,
@@ -57,19 +69,6 @@ export const errorReducer = (state = {}, action) => {
       code: action.errorObj.code,
       message: action.errorObj.message,
     }
-  default:
-    return state
-  }
-}
-
-export const authReducer = (state = {}, action) => {
-  switch (action.type) {
-  case 'LOGIN':
-    return {
-      uid: action.uid,
-    }
-  case 'LOGOUT':
-    return {}
   default:
     return state
   }

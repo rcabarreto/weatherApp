@@ -2,14 +2,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 const WeatherError = (props) => {
-  const { show } = props.error
+  const { error } = props
 
-  if (!show) {
+  if (!error) {
     return null
   }
 
   return (
-    <main id="errorContainer" role="loader" className="inner cover">
+    <main id="errorContainer" className="inner cover">
       <h1 className="cover-heading">Oops... something went wrong!</h1>
       <p id="errorMessage" className="lead">{error.message}</p>
     </main>
