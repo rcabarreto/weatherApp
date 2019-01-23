@@ -2,8 +2,6 @@ import api from '../api/WeatherAPI'
 
 export const setCoords = position => ({ type: 'SET_COORDS', position })
 
-export const toggleLoader = () => ({ type: 'TOGGLE_LOADER' })
-
 export const showLoader = () => ({ type: 'SHOW_LOADER' })
 
 export const setLocation = locationAddr => ({ type: 'SET_LOCATION', locationAddr })

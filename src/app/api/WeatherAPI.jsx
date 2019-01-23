@@ -9,6 +9,10 @@ const WEATHER_API_KEY = process.env.WEATHER_API_KEY || 'XXXXXX'
 
 const api = {
 
+  makeApiGetCall(apiUrl) {
+    return axios.get(apiUrl).then(response => response.data).catch(error => error)
+  },
+
   getCoordinates() {
     return new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(resolve, reject)
@@ -34,38 +38,19 @@ const api = {
     }
   },
 
-  loadWeather() {
-    return this.getCoordinates().then(position => this.loadLocationInfo(position.coords.latitude, position.coords.longitude)).then(location => location)
-  },
-
   loadLocation(latitude, longitude) {
     const apiUrl = `${GEOCODE_API_URL}?key=${GEOCODE_API_KEY}&lat=${latitude}&lon=${longitude}&format=${GEOCODE_API_RETURN_FORMAT}`
-    return axios.get(apiUrl).then(response => response.data).catch(error => error)
+    return this.makeApiGetCall(apiUrl)
   },
-
 
   loadWeatherByCityname(cityName, countryCode) {
     const apiUrl = `${WEATHER_API_URL}?q=${cityName},${countryCode}&units=metric&APPID=${WEATHER_API_KEY}`
-
-    return new Promise((resolve, reject) => {
-      axios.get(apiUrl).then((response) => {
-        resolve(response.data)
-      }).catch((error) => {
-        reject(error)
-      })
-    })
+    return this.makeApiGetCall(apiUrl)
   },
 
   loadWeatherByCoordinates(latitude, longitude) {
     const apiUrl = `${WEATHER_API_URL}?lat=${latitude}&lon=${longitude}&units=metric&APPID=${WEATHER_API_KEY}`
-
-    return new Promise((resolve, reject) => {
-      axios.get(apiUrl).then((response) => {
-        resolve(response.data)
-      }).catch((error) => {
-        reject(error)
-      })
-    })
+    return this.makeApiGetCall(apiUrl)
   },
 
 }

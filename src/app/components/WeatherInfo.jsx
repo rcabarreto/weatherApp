@@ -14,9 +14,9 @@ class WeatherInfo extends React.Component {
   }
 
   componentDidUpdate() {
-    const { coords, dispatch } = this.props
-    dispatch(actions.loadLocation(coords.latitude, coords.longitude))
-    dispatch(actions.loadWeather(coords.latitude, coords.longitude))
+    const { latitude, longitude, dispatch } = this.props
+    dispatch(actions.loadLocation(latitude, longitude))
+    dispatch(actions.loadWeather(latitude, longitude))
   }
 
   render() {
@@ -31,9 +31,15 @@ class WeatherInfo extends React.Component {
 }
 
 WeatherInfo.propTypes = {
-  coords: PropTypes.node.isRequired,
+  latitude: PropTypes.number,
+  longitude: PropTypes.number,
+}
+
+WeatherInfo.defaultProps = {
+  latitude: 0,
+  longitude: 0,
 }
 
 export default connect(
-  state => ({ coords: state.coords }),
+  state => ({ ...state.coords }),
 )(WeatherInfo)

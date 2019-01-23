@@ -1,6 +1,6 @@
 
 
-export const loaderReducer = (state = false, action) => {
+export const loaderReducer = (state = true, action) => {
   switch (action.type) {
   case 'TOGGLE_LOADER':
     return !state
@@ -29,6 +29,7 @@ export const locationReducer = (state = {}, action) => {
   switch (action.type) {
   case 'SET_LOCATION':
     return {
+      show: true,
       road: action.locationAddr.road,
       suburb: action.locationAddr.suburb,
       city: action.locationAddr.city,
@@ -45,7 +46,7 @@ export const weatherReducer = (state = {}, action) => {
   switch (action.type) {
   case 'SET_WEATHER_INFO':
     return {
-      show: action.weather.show,
+      show: true,
       summary: action.weather.weather[0].description,
       icon: action.weather.weather[0].id,
       temperature: action.weather.main.temp,
@@ -65,7 +66,7 @@ export const errorReducer = (state = {}, action) => {
   switch (action.type) {
   case 'UPDATE_ERROR_MESSAGE':
     return {
-      show: action.errorObj.show,
+      show: true,
       code: action.errorObj.code,
       message: action.errorObj.message,
     }

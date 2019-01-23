@@ -3,24 +3,40 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 const WeatherLocation = (props) => {
-  const { location } = props
-
-  if (!location.country) {
-    return null
-  }
+  const {
+    show,
+    city,
+    country,
+    road,
+    suburb,
+  } = props
 
   return (
-    <React.Fragment>
-      <h1 key="1" id="weatherTitle" className="cover-heading">{location.city}, {location.country}</h1>
-      <h6 key="2">{location.road}, {location.suburb}</h6>
-    </React.Fragment>
+    show && (
+      <React.Fragment>
+        <h1 key="1" id="weatherTitle" className="cover-heading">{city}, {country}</h1>
+        <h6 key="2">{road}, {suburb}</h6>
+      </React.Fragment>
+    )
   )
 }
 
 WeatherLocation.propTypes = {
-  location: PropTypes.node.isRequired,
+  show: PropTypes.bool,
+  city: PropTypes.string,
+  country: PropTypes.string,
+  road: PropTypes.string,
+  suburb: PropTypes.string,
+}
+
+WeatherLocation.defaultProps = {
+  show: false,
+  city: '',
+  country: '',
+  road: '',
+  suburb: '',
 }
 
 export default connect(
-  state => ({ location: state.location }),
+  state => ({ ...state.location }),
 )(WeatherLocation)
