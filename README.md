@@ -37,7 +37,7 @@ GEOCODE_API_KEY=[YOUR GEOCODE API KEY]
 Once the .env file is in place, just run:
 
 ```
-$ yarn dev
+$ yarn start
 ```
 
 After you start the application, just open you prefered web browser and go to:
@@ -53,7 +53,7 @@ You need to have Node installed to run this project.
 
 ```
 $ cd ~
-$ curl -sL https://deb.nodesource.com/setup_8.x -o nodesource_setup.sh
+$ curl -sL https://deb.nodesource.com/setup_10.x -o nodesource_setup.sh
 $ sudo apt-get install nodejs
 ```
 
@@ -65,7 +65,7 @@ $ node -v
 
 ```
 Output
-v8.0.0
+v10.0.0
 ```
 
 

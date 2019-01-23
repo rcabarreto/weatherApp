@@ -20,26 +20,31 @@ class WeatherInfo extends React.Component {
   }
 
   render() {
+    const { show } = this.props
     return (
-      <main id="weatherInformation" role="main" className="inner cover">
-        <WeatherLocation />
-        <WeatherSummary />
-        <div id="dailyWeather" />
-      </main>
+      show && (
+        <main id="weatherInformation" role="main" className="inner cover">
+          <WeatherLocation />
+          <WeatherSummary />
+          <div id="dailyWeather" />
+        </main>
+      )
     )
   }
 }
 
 WeatherInfo.propTypes = {
+  show: PropTypes.bool,
   latitude: PropTypes.number,
   longitude: PropTypes.number,
 }
 
 WeatherInfo.defaultProps = {
+  show: false,
   latitude: 0,
   longitude: 0,
 }
 
 export default connect(
-  state => ({ ...state.coords }),
+  state => ({ ...state.coords, show: (state.location.show && state.weather.show) }),
 )(WeatherInfo)
