@@ -10,7 +10,10 @@ const WEATHER_API_KEY = process.env.WEATHER_API_KEY || 'XXXXXX'
 const api = {
 
   makeApiGetCall(apiUrl) {
-    return axios.get(apiUrl).then(response => response.data).catch(error => error)
+    return axios
+      .get(apiUrl)
+      .then(response => response.data)
+      .catch(error => error)
   },
 
   getCoordinates() {

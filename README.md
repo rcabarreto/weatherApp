@@ -29,9 +29,9 @@ You'll also need a valid key for the OpenWeatherMap API, more information here: 
 Once you have both API Keys, you can create a .env file on the root folder. The env file will look like this:
 
 ```
-NODE_ENV=development
-WEATHER_API_KEY=[YOUR WEATHER API KEY]
-GEOCODE_API_KEY=[YOUR GEOCODE API KEY]
+  NODE_ENV=development
+  WEATHER_API_KEY=[YOUR WEATHER API KEY]
+  GEOCODE_API_KEY=[YOUR GEOCODE API KEY]
 ```
 
 Once the .env file is in place, just run:
